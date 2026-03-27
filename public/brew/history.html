@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>History & Stats | The Curated Brew</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,400;0,700;0,800;1,800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                colors: {
+                    "surface-bright": "#fff8ef", "secondary-container": "#fadcd2",
+                    "primary-fixed-dim": "#e9bdae", "on-tertiary-fixed": "#201a18",
+                    "on-tertiary": "#ffffff", "on-secondary-fixed-variant": "#56423b",
+                    "surface-container-low": "#fbf3e4", "tertiary-container": "#403936",
+                    "secondary-fixed": "#fadcd2", "inverse-primary": "#e9bdae",
+                    "tertiary-fixed-dim": "#cfc4c0", "surface-dim": "#e1d9cb",
+                    "surface-variant": "#e9e2d3", "on-secondary-container": "#766057",
+                    "outline": "#827471", "background": "#fff8ef",
+                    "on-primary-fixed": "#2d150d", "error-container": "#ffdad6",
+                    "surface-container": "#f5edde", "surface": "#fff8ef",
+                    "on-tertiary-container": "#aca29f", "on-background": "#1e1b13",
+                    "on-error-container": "#93000a", "on-primary": "#ffffff",
+                    "surface-container-lowest": "#ffffff", "on-tertiary-fixed-variant": "#4c4542",
+                    "primary-fixed": "#ffdbcf", "outline-variant": "#d4c3bf",
+                    "on-primary-fixed-variant": "#5e3f35", "on-secondary-fixed": "#271812",
+                    "on-surface": "#1e1b13", "tertiary": "#292421",
+                    "secondary-fixed-dim": "#ddc1b7", "on-primary-container": "#c59b8e",
+                    "primary-container": "#513329", "surface-container-high": "#efe7d9",
+                    "surface-container-highest": "#e9e2d3", "surface-tint": "#79564b",
+                    "on-error": "#ffffff", "primary": "#381e15",
+                    "on-surface-variant": "#504442", "inverse-surface": "#343026",
+                    "tertiary-fixed": "#ece0dc", "secondary": "#6f5a52",
+                    "on-secondary": "#ffffff", "inverse-on-surface": "#f8f0e1",
+                    "error": "#ba1a1a"
+                },
+                fontFamily: { "headline": ["Epilogue"], "body": ["Manrope"], "label": ["Manrope"] },
+                borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+            },
+        },
+    }
+</script>
+<style>
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    body { font-family: 'Manrope', sans-serif; background-color: #fff8ef; color: #1e1b13; }
+    .heat-map-square { aspect-ratio: 1 / 1; }
+</style>
+</head>
+<body class="min-h-screen flex flex-col">
+<header class="sticky top-0 w-full z-50 bg-[#fff8ef]/70 backdrop-blur-md shadow-[0_12px_32px_rgba(56,30,21,0.06)]">
+<nav class="flex justify-between items-center px-6 py-4 max-w-7xl mx-auto">
+<a href="index.html" class="font-['Epilogue'] font-extrabold text-[#381e15] text-xl italic no-underline">The Curated Brew</a>
+<div class="hidden md:flex gap-8 items-center">
+<a class="font-['Epilogue'] font-bold tracking-tight text-lg text-[#504442] hover:text-[#381e15] transition-colors" href="index.html">Dashboard</a>
+<a class="font-['Epilogue'] font-bold tracking-tight text-lg text-[#381e15] border-b-2 border-[#381e15] pb-1" href="history.html">History</a>
+<a class="font-['Epilogue'] font-bold tracking-tight text-lg text-[#504442] hover:text-[#381e15] transition-colors" href="settings.html">Settings</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="hover:opacity-80 transition-opacity duration-200">
+<span class="material-symbols-outlined text-[#4E342E] text-2xl">account_circle</span>
+</button>
+</div>
+</nav>
+</header>
+<main class="max-w-7xl mx-auto w-full px-6 py-12 flex-grow">
+<section class="mb-16 ml-[5%]">
+<h1 class="font-headline font-extrabold text-5xl md:text-7xl text-primary tracking-tighter mb-4">The Sensory Archive.</h1>
+<p class="font-body text-on-surface-variant text-lg max-w-xl leading-relaxed">A retrospective of your ritual. Tracking the nuances of every extraction, temperature, and origin across your journey.</p>
+</section>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 mb-12">
+<!-- Heat Map -->
+<div class="md:col-span-8 bg-surface-container-lowest p-8 rounded-xl shadow-[0_12px_32px_rgba(56,30,21,0.04)]">
+<div class="flex justify-between items-end mb-8">
+<div>
+<span class="font-label text-xs uppercase tracking-widest text-on-surface-variant mb-1 block">Consistency</span>
+<h2 class="font-headline font-bold text-2xl text-primary">Monthly Ritual</h2>
+</div>
+<div class="text-right">
+<span class="font-body text-sm text-on-surface-variant italic" id="month-label">Loading...</span>
+</div>
+</div>
+<div class="grid grid-cols-7 gap-2" id="heatmap-grid">
+<div class="text-center font-label text-[10px] text-outline mb-2">SUN</div>
+<div class="text-center font-label text-[10px] text-outline mb-2">MON</div>
+<div class="text-center font-label text-[10px] text-outline mb-2">TUE</div>
+<div class="text-center font-label text-[10px] text-outline mb-2">WED</div>
+<div class="text-center font-label text-[10px] text-outline mb-2">THU</div>
+<div class="text-center font-label text-[10px] text-outline mb-2">FRI</div>
+<div class="text-center font-label text-[10px] text-outline mb-2">SAT</div>
+</div>
+<div class="mt-6 flex items-center justify-end gap-2">
+<span class="font-label text-[10px] text-outline uppercase">Less</span>
+<div class="w-3 h-3 rounded-sm bg-primary opacity-10"></div>
+<div class="w-3 h-3 rounded-sm bg-primary opacity-40"></div>
+<div class="w-3 h-3 rounded-sm bg-primary opacity-70"></div>
+<div class="w-3 h-3 rounded-sm bg-primary opacity-100"></div>
+<span class="font-label text-[10px] text-outline uppercase">More</span>
+</div>
+</div>
+<!-- Summary Stats -->
+<div class="md:col-span-4 flex flex-col gap-6">
+<div class="flex-1 bg-primary text-on-primary p-8 rounded-xl relative overflow-hidden group">
+<div class="relative z-10">
+<span class="font-label text-xs uppercase tracking-widest opacity-70 mb-1 block">Current Streak</span>
+<div class="flex items-baseline gap-2">
+<span class="font-headline font-extrabold text-6xl" id="streak-count">0</span>
+<span class="font-body text-xl opacity-80 italic">Days</span>
+</div>
+</div>
+<span class="material-symbols-outlined absolute -bottom-4 -right-4 text-9xl opacity-10 rotate-12 group-hover:rotate-0 transition-transform duration-700" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+</div>
+<div class="flex-1 bg-surface-container-low p-8 rounded-xl">
+<span class="font-label text-xs uppercase tracking-widest text-on-surface-variant mb-1 block">Daily Average</span>
+<div class="flex items-baseline gap-2">
+<span class="font-headline font-extrabold text-5xl text-primary" id="daily-avg">0</span>
+<span class="font-body text-lg text-on-surface-variant italic">cups</span>
+</div>
+</div>
+<div class="flex-1 bg-secondary-container p-8 rounded-xl">
+<span class="font-label text-xs uppercase tracking-widest text-on-secondary-container mb-1 block">Highest Single Day</span>
+<div class="flex items-baseline gap-2">
+<span class="font-headline font-extrabold text-5xl text-on-secondary-container" id="peak-day">0</span>
+<span class="font-body text-lg text-on-secondary-container italic">cups</span>
+</div>
+</div>
+</div>
+<!-- Weekly Bar Chart -->
+<div class="md:col-span-12 bg-surface-container-lowest p-8 rounded-xl shadow-[0_12px_32px_rgba(56,30,21,0.04)]">
+<div class="flex justify-between items-center mb-10">
+<h2 class="font-headline font-bold text-2xl text-primary">Volume Distribution</h2>
+</div>
+<div class="flex items-end justify-between h-48 gap-4 px-4" id="bar-chart"></div>
+</div>
+</div>
+<!-- History Table -->
+<section class="mt-20">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8">
+<div>
+<h2 class="font-headline font-bold text-3xl text-primary">Journal Entries</h2>
+<p class="font-body text-on-surface-variant">The complete chronicle of your taste explorations.</p>
+</div>
+</div>
+<div class="space-y-10" id="history-entries">
+<div class="text-center py-12 text-on-surface-variant">
+<p>No entries yet. <a href="log.html" class="text-primary font-bold underline">Log your first brew</a>.</p>
+</div>
+</div>
+</section>
+</main>
+<footer class="w-full py-12 px-6 mt-auto bg-[#fbf3e4]">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 w-full">
+<div class="font-['Epilogue'] font-bold text-[#4E342E]">The Curated Brew</div>
+<div class="font-['Manrope'] text-sm tracking-wide text-[#504442]">&copy; 2024 The Curated Brew. An Editorial Coffee Journal.</div>
+<div class="flex gap-6">
+<a class="font-['Manrope'] text-sm tracking-wide text-[#504442] hover:text-[#381e15] underline decoration-[#381e15]/20 transition-all" href="#">Privacy</a>
+<a class="font-['Manrope'] text-sm tracking-wide text-[#504442] hover:text-[#381e15] underline decoration-[#381e15]/20 transition-all" href="#">Terms</a>
+<a class="font-['Manrope'] text-sm tracking-wide text-[#504442] hover:text-[#381e15] underline decoration-[#381e15]/20 transition-all" href="#">Support</a>
+</div>
+</div>
+</footer>
+<script>
+const entries = JSON.parse(localStorage.getItem('brew_entries') || '[]');
+const now = new Date();
+
+// Month label
+const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+document.getElementById('month-label').textContent = `${monthNames[now.getMonth()]} ${now.getFullYear()}`;
+
+// Build heatmap
+const year = now.getFullYear();
+const month = now.getMonth();
+const firstDay = new Date(year, month, 1).getDay();
+const daysInMonth = new Date(year, month + 1, 0).getDate();
+const grid = document.getElementById('heatmap-grid');
+
+// Count per day
+const dayCounts = {};
+entries.forEach(e => { dayCounts[e.date] = (dayCounts[e.date] || 0) + 1; });
+const maxCount = Math.max(1, ...Object.values(dayCounts));
+
+// Empty cells for offset
+for (let i = 0; i < firstDay; i++) {
+    const cell = document.createElement('div');
+    cell.className = 'heat-map-square rounded-sm bg-surface-container-high opacity-20';
+    grid.appendChild(cell);
+}
+// Day cells
+for (let d = 1; d <= daysInMonth; d++) {
+    const dateStr = `${year}-${(month+1).toString().padStart(2,'0')}-${d.toString().padStart(2,'0')}`;
+    const count = dayCounts[dateStr] || 0;
+    const opacity = count === 0 ? 10 : Math.max(20, Math.round((count / maxCount) * 100));
+    const cell = document.createElement('div');
+    cell.className = `heat-map-square rounded-sm bg-primary`;
+    cell.style.opacity = opacity / 100;
+    cell.title = `${dateStr}: ${count} cups`;
+    grid.appendChild(cell);
+}
+// Fill remaining
+const totalCells = firstDay + daysInMonth;
+const remaining = (7 - (totalCells % 7)) % 7;
+for (let i = 0; i < remaining; i++) {
+    const cell = document.createElement('div');
+    cell.className = 'heat-map-square rounded-sm bg-surface-container-low';
+    grid.appendChild(cell);
+}
+
+// Stats
+const uniqueDays = Object.keys(dayCounts);
+const streak = (() => {
+    let s = 0;
+    let d = new Date(now);
+    while (true) {
+        const key = d.toISOString().split('T')[0];
+        if (dayCounts[key]) { s++; d.setDate(d.getDate() - 1); }
+        else break;
+    }
+    return s;
+})();
+document.getElementById('streak-count').textContent = streak;
+document.getElementById('daily-avg').textContent = uniqueDays.length ? (entries.length / uniqueDays.length).toFixed(1) : '0';
+document.getElementById('peak-day').textContent = maxCount > 0 && entries.length > 0 ? maxCount : '0';
+
+// Bar chart - last 7 days
+const barChart = document.getElementById('bar-chart');
+const dayLabels = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const last7 = [];
+for (let i = 6; i >= 0; i--) {
+    const d = new Date(now);
+    d.setDate(d.getDate() - i);
+    last7.push(d);
+}
+const max7 = Math.max(1, ...last7.map(d => dayCounts[d.toISOString().split('T')[0]] || 0));
+
+last7.forEach(d => {
+    const key = d.toISOString().split('T')[0];
+    const count = dayCounts[key] || 0;
+    const heightPct = count === 0 ? 5 : Math.round((count / max7) * 100);
+    barChart.innerHTML += `
+        <div class="flex-1 flex flex-col items-center gap-4">
+            <div class="w-full bg-primary-container/20 rounded-t-lg relative group" style="height: ${Math.max(24, heightPct * 1.8)}px">
+                <div class="absolute bottom-0 w-full bg-primary rounded-t-lg transition-all duration-500" style="height: ${heightPct}%"></div>
+                <div class="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-primary text-white text-[10px] px-2 py-1 rounded">${count} cups</div>
+            </div>
+            <span class="font-label text-[10px] text-outline uppercase">${dayLabels[d.getDay()]}</span>
+        </div>`;
+});
+
+// History entries grouped by date
+const historyDiv = document.getElementById('history-entries');
+if (entries.length > 0) {
+    const grouped = {};
+    entries.forEach(e => {
+        if (!grouped[e.date]) grouped[e.date] = [];
+        grouped[e.date].push(e);
+    });
+    const sortedDates = Object.keys(grouped).sort().reverse();
+    const icons = { 'Espresso': 'coffee', 'Latte': 'local_cafe', 'Cappuccino': 'coffee_maker', 'Cold Brew': 'icecream', 'Drip': 'water_drop', 'Other': 'local_cafe' };
+
+    const today = now.toISOString().split('T')[0];
+    const yesterday = new Date(now); yesterday.setDate(yesterday.getDate()-1);
+    const yesterdayStr = yesterday.toISOString().split('T')[0];
+
+    historyDiv.innerHTML = sortedDates.map(date => {
+        const label = date === today ? 'Today' : date === yesterdayStr ? 'Yesterday' : new Date(date + 'T12:00:00').toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
+        return `<div>
+            <h3 class="font-label text-xs uppercase tracking-[0.2em] text-outline mb-4 flex items-center gap-4">
+                ${label}
+                <div class="flex-grow h-[1px] bg-outline-variant opacity-30"></div>
+            </h3>
+            <div class="space-y-4">
+                ${grouped[date].reverse().map(entry => `
+                    <div class="group bg-surface-container-lowest p-5 rounded-xl flex items-center gap-6 hover:shadow-lg hover:shadow-primary/5 transition-all">
+                        <div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center text-primary">
+                            <span class="material-symbols-outlined">${icons[entry.type] || 'coffee'}</span>
+                        </div>
+                        <div class="flex-grow">
+                            <h4 class="font-headline font-bold text-lg text-primary">${entry.type}</h4>
+                            <div class="flex gap-4 mt-1">
+                                <span class="font-body text-xs text-on-surface-variant flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-[14px]">straighten</span> ${entry.size}
+                                </span>
+                                <span class="font-body text-xs text-on-surface-variant flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-[14px]">schedule</span> ${entry.time}
+                                </span>
+                            </div>
+                        </div>
+                        ${entry.notes ? `<div class="text-xs text-on-surface-variant italic max-w-[200px] truncate">${entry.notes}</div>` : ''}
+                        <button class="text-outline hover:text-error transition-colors delete-btn" data-id="${entry.id}" title="Delete entry">
+                            <span class="material-symbols-outlined">delete</span>
+                        </button>
+                    </div>
+                `).join('')}
+            </div>
+        </div>`;
+    }).join('');
+
+    // Delete handlers
+    document.querySelectorAll('.delete-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const id = parseInt(btn.dataset.id);
+            const all = JSON.parse(localStorage.getItem('brew_entries') || '[]');
+            const filtered = all.filter(e => e.id !== id);
+            localStorage.setItem('brew_entries', JSON.stringify(filtered));
+            location.reload();
+        });
+    });
+}
+</script>
+</body></html>

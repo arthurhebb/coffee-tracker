@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Settings | The Curated Brew</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,400;0,700;0,800;1,800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                colors: {
+                    "surface-bright": "#fff8ef", "secondary-container": "#fadcd2",
+                    "primary-fixed-dim": "#e9bdae", "on-tertiary-fixed": "#201a18",
+                    "on-tertiary": "#ffffff", "on-secondary-fixed-variant": "#56423b",
+                    "surface-container-low": "#fbf3e4", "tertiary-container": "#403936",
+                    "secondary-fixed": "#fadcd2", "inverse-primary": "#e9bdae",
+                    "tertiary-fixed-dim": "#cfc4c0", "surface-dim": "#e1d9cb",
+                    "surface-variant": "#e9e2d3", "on-secondary-container": "#766057",
+                    "outline": "#827471", "background": "#fff8ef",
+                    "on-primary-fixed": "#2d150d", "error-container": "#ffdad6",
+                    "surface-container": "#f5edde", "surface": "#fff8ef",
+                    "on-tertiary-container": "#aca29f", "on-background": "#1e1b13",
+                    "on-error-container": "#93000a", "on-primary": "#ffffff",
+                    "surface-container-lowest": "#ffffff", "on-tertiary-fixed-variant": "#4c4542",
+                    "primary-fixed": "#ffdbcf", "outline-variant": "#d4c3bf",
+                    "on-primary-fixed-variant": "#5e3f35", "on-secondary-fixed": "#271812",
+                    "on-surface": "#1e1b13", "tertiary": "#292421",
+                    "secondary-fixed-dim": "#ddc1b7", "on-primary-container": "#c59b8e",
+                    "primary-container": "#513329", "surface-container-high": "#efe7d9",
+                    "surface-container-highest": "#e9e2d3", "surface-tint": "#79564b",
+                    "on-error": "#ffffff", "primary": "#381e15",
+                    "on-surface-variant": "#504442", "inverse-surface": "#343026",
+                    "tertiary-fixed": "#ece0dc", "secondary": "#6f5a52",
+                    "on-secondary": "#ffffff", "inverse-on-surface": "#f8f0e1",
+                    "error": "#ba1a1a"
+                },
+                fontFamily: { "headline": ["Epilogue"], "body": ["Manrope"], "label": ["Manrope"] },
+                borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+            },
+        },
+    }
+</script>
+<style>
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    body { font-family: 'Manrope', sans-serif; }
+</style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col">
+<nav class="sticky top-0 w-full z-50 bg-[#fff8ef]/70 backdrop-blur-md shadow-[0_12px_32px_rgba(56,30,21,0.06)]">
+<div class="flex justify-between items-center px-6 py-4 max-w-7xl mx-auto">
+<a href="index.html" class="font-['Epilogue'] font-extrabold text-[#381e15] text-xl italic no-underline">The Curated Brew</a>
+<div class="hidden md:flex items-center gap-8">
+<a class="font-['Epilogue'] font-bold tracking-tight text-lg text-[#504442] hover:text-[#381e15] transition-colors" href="index.html">Dashboard</a>
+<a class="font-['Epilogue'] font-bold tracking-tight text-lg text-[#504442] hover:text-[#381e15] transition-colors" href="history.html">History</a>
+<a class="font-['Epilogue'] font-bold tracking-tight text-lg text-[#381e15] border-b-2 border-[#381e15] pb-1" href="settings.html">Settings</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="hover:opacity-80 transition-opacity duration-200">
+<span class="material-symbols-outlined text-[#381e15] text-2xl">account_circle</span>
+</button>
+</div>
+</div>
+</nav>
+<main class="flex-grow max-w-7xl mx-auto w-full px-6 py-12">
+<div class="mb-12">
+<h1 class="font-headline font-extrabold text-5xl tracking-tight text-primary mb-2">Preferences</h1>
+<p class="font-body text-on-surface-variant text-lg">Curate your daily brewing ritual and notification environment.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+<div class="md:col-span-4 space-y-8">
+<section class="bg-surface-container-lowest rounded-xl p-8 shadow-[0_12px_32px_rgba(56,30,21,0.06)] transition-all hover:bg-surface-bright">
+<div class="flex flex-col items-center text-center">
+<div class="w-24 h-24 rounded-full overflow-hidden mb-4 ring-4 ring-surface-container-low bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-5xl text-primary">person</span>
+</div>
+<h2 class="font-headline font-bold text-xl text-primary" id="user-name">Coffee Lover</h2>
+<span class="font-label text-sm text-on-secondary-container bg-secondary-container px-3 py-1 rounded-full mt-2">Connoisseur</span>
+</div>
+<div class="mt-8 space-y-4">
+<div class="group">
+<label class="font-label text-xs uppercase tracking-widest text-on-surface-variant">Display Name</label>
+<input type="text" id="display-name" class="w-full bg-transparent border-0 border-b border-outline-variant focus:border-primary focus:ring-0 font-body font-medium px-0 py-1" value="Coffee Lover"/>
+</div>
+<div class="group">
+<label class="font-label text-xs uppercase tracking-widest text-on-surface-variant">Total Brews Logged</label>
+<p class="font-body font-medium" id="total-logged">0</p>
+</div>
+</div>
+</section>
+<section class="bg-primary text-on-primary rounded-xl p-8 overflow-hidden relative">
+<div class="relative z-10">
+<h3 class="font-headline font-bold text-lg mb-1">Current Limit</h3>
+<div class="text-4xl font-headline font-extrabold mb-4"><span id="limit-display">4</span> <span class="text-xl font-normal opacity-70">Cups / Day</span></div>
+<div class="w-full bg-primary-container h-2 rounded-full overflow-hidden mb-2">
+<div class="h-full bg-primary-fixed-dim rounded-full" id="limit-bar" style="width: 0%"></div>
+</div>
+<p class="font-body text-xs opacity-80" id="limit-text">Loading...</p>
+</div>
+<div class="absolute -bottom-4 -right-4 opacity-10">
+<span class="material-symbols-outlined text-[120px]">coffee</span>
+</div>
+</section>
+</div>
+<div class="md:col-span-8 space-y-8">
+<div class="bg-surface-container-low rounded-xl p-10">
+<div class="flex items-center gap-4 mb-8">
+<span class="material-symbols-outlined text-primary text-3xl">energy_savings_leaf</span>
+<h3 class="font-headline font-bold text-2xl text-primary">Consumption Rituals</h3>
+</div>
+<div class="space-y-10">
+<div class="space-y-4">
+<div class="flex justify-between items-end">
+<div>
+<h4 class="font-headline font-bold text-primary">Daily Cup Limit</h4>
+<p class="font-body text-sm text-on-surface-variant">Set your soft-cap for daily caffeine intake.</p>
+</div>
+<span class="font-headline font-extrabold text-3xl text-primary" id="slider-value">4</span>
+</div>
+<input id="limit-slider" class="w-full h-1.5 bg-outline-variant rounded-lg appearance-none cursor-pointer accent-primary" max="10" min="1" type="range" value="4"/>
+<div class="flex justify-between font-label text-xs text-on-tertiary-fixed-variant">
+<span>1 Cup</span>
+<span>10 Cups</span>
+</div>
+</div>
+<div class="flex flex-col gap-6">
+<div class="flex items-center justify-between p-4 bg-surface-container-lowest rounded-lg">
+<div>
+<h4 class="font-body font-bold text-primary">Browser Notifications</h4>
+<p class="font-body text-xs text-on-surface-variant">Alert me when I exceed my set limit for the day.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input type="checkbox" id="notif-toggle" class="sr-only peer"/>
+<div class="w-11 h-6 bg-outline-variant peer-checked:bg-primary rounded-full transition-colors"></div>
+<div class="absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-all peer-checked:left-6"></div>
+</label>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-xl p-10">
+<div class="flex items-center gap-4 mb-8">
+<span class="material-symbols-outlined text-primary text-3xl">palette</span>
+<h3 class="font-headline font-bold text-2xl text-primary">Visual Identity</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="bg-surface-container-lowest p-6 rounded-xl flex flex-col items-center gap-4 border-2 border-primary cursor-pointer" id="light-mode-btn">
+<span class="material-symbols-outlined text-primary text-4xl">light_mode</span>
+<div class="text-center">
+<h4 class="font-headline font-bold text-primary">Light Mode</h4>
+<p class="text-xs text-on-surface-variant">Clean and bright paper aesthetic</p>
+</div>
+</div>
+<div class="bg-tertiary p-6 rounded-xl flex flex-col items-center gap-4 opacity-40 hover:opacity-100 transition-opacity cursor-pointer" id="dark-mode-btn">
+<span class="material-symbols-outlined text-surface-bright text-4xl">dark_mode</span>
+<div class="text-center">
+<h4 class="font-headline font-bold text-surface-bright">Dark Mode</h4>
+<p class="text-xs text-tertiary-fixed">Coming soon</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Danger Zone -->
+<div class="bg-error-container rounded-xl p-10">
+<div class="flex items-center gap-4 mb-6">
+<span class="material-symbols-outlined text-on-error-container text-3xl">warning</span>
+<h3 class="font-headline font-bold text-2xl text-on-error-container">Data Management</h3>
+</div>
+<p class="font-body text-sm text-on-error-container mb-6">Clear all your brew history. This cannot be undone.</p>
+<button id="clear-data" class="px-6 py-3 bg-error text-on-error rounded-full font-headline font-bold text-sm active:scale-95 transition-all">
+Clear All Data
+</button>
+</div>
+</div>
+</div>
+<!-- Save confirmation toast -->
+<div id="save-toast" class="fixed bottom-8 left-1/2 -translate-x-1/2 bg-primary text-on-primary px-6 py-3 rounded-full font-bold text-sm shadow-xl transition-all opacity-0 translate-y-4 pointer-events-none">
+Settings saved!
+</div>
+</main>
+<footer class="bg-[#fbf3e4] w-full py-12 px-6 mt-auto">
+<div class="flex flex-col md:flex-row justify-between items-center gap-4 w-full max-w-7xl mx-auto">
+<div class="font-['Epilogue'] font-bold text-[#4E342E]">The Curated Brew</div>
+<p class="font-['Manrope'] text-sm tracking-wide text-[#381e15]">&copy; 2024 The Curated Brew. An Editorial Coffee Journal.</p>
+<div class="flex gap-6">
+<a class="font-['Manrope'] text-sm tracking-wide text-[#504442] hover:text-[#381e15] underline decoration-[#381e15]/20" href="#">Privacy</a>
+<a class="font-['Manrope'] text-sm tracking-wide text-[#504442] hover:text-[#381e15] underline decoration-[#381e15]/20" href="#">Terms</a>
+<a class="font-['Manrope'] text-sm tracking-wide text-[#504442] hover:text-[#381e15] underline decoration-[#381e15]/20" href="#">Support</a>
+</div>
+</div>
+</footer>
+<script>
+// Load settings
+const settings = JSON.parse(localStorage.getItem('brew_settings') || '{"limit": 4, "notifications": false, "name": "Coffee Lover"}');
+const entries = JSON.parse(localStorage.getItem('brew_entries') || '[]');
+const today = new Date().toISOString().split('T')[0];
+const todayCount = entries.filter(e => e.date === today).length;
+
+// Apply settings
+document.getElementById('display-name').value = settings.name || 'Coffee Lover';
+document.getElementById('user-name').textContent = settings.name || 'Coffee Lover';
+document.getElementById('limit-slider').value = settings.limit || 4;
+document.getElementById('slider-value').textContent = settings.limit || 4;
+document.getElementById('limit-display').textContent = settings.limit || 4;
+document.getElementById('notif-toggle').checked = settings.notifications || false;
+document.getElementById('total-logged').textContent = entries.length;
+
+// Limit bar
+const pct = Math.min(100, Math.round((todayCount / (settings.limit || 4)) * 100));
+document.getElementById('limit-bar').style.width = pct + '%';
+document.getElementById('limit-text').textContent = `You've reached ${pct}% of your limit today (${todayCount}/${settings.limit || 4}).`;
+
+function showToast() {
+    const toast = document.getElementById('save-toast');
+    toast.classList.remove('opacity-0', 'translate-y-4');
+    toast.classList.add('opacity-100', 'translate-y-0');
+    setTimeout(() => {
+        toast.classList.remove('opacity-100', 'translate-y-0');
+        toast.classList.add('opacity-0', 'translate-y-4');
+    }, 2000);
+}
+
+function saveSettings() {
+    settings.limit = parseInt(document.getElementById('limit-slider').value);
+    settings.notifications = document.getElementById('notif-toggle').checked;
+    settings.name = document.getElementById('display-name').value;
+    localStorage.setItem('brew_settings', JSON.stringify(settings));
+    showToast();
+}
+
+// Slider
+document.getElementById('limit-slider').addEventListener('input', function() {
+    document.getElementById('slider-value').textContent = this.value;
+    document.getElementById('limit-display').textContent = this.value;
+    const newPct = Math.min(100, Math.round((todayCount / this.value) * 100));
+    document.getElementById('limit-bar').style.width = newPct + '%';
+    document.getElementById('limit-text').textContent = `You've reached ${newPct}% of your limit today (${todayCount}/${this.value}).`;
+    saveSettings();
+});
+
+document.getElementById('notif-toggle').addEventListener('change', saveSettings);
+document.getElementById('display-name').addEventListener('change', function() {
+    document.getElementById('user-name').textContent = this.value;
+    saveSettings();
+});
+
+// Clear data
+document.getElementById('clear-data').addEventListener('click', function() {
+    if (confirm('Are you sure you want to delete all your brew history? This cannot be undone.')) {
+        localStorage.removeItem('brew_entries');
+        localStorage.removeItem('brew_settings');
+        location.reload();
+    }
+});
+</script>
+</body></html>
